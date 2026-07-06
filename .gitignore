@@ -1,0 +1,13 @@
+node_modules
+dist
+.env
+.env.local
+*.local
+
+# IDE
+.idea
+.vscode
+
+# Supabase local CLI state
+supabase/.temp
+supabase/.branches
