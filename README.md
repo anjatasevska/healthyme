@@ -161,7 +161,3 @@ healthyme/
 | `npm run preview` | Preview production build locally |
 
 ---
-
-## License
-
-This project was built as an educational / portfolio application. Add a license here if you plan to open-source it (e.g. MIT).
