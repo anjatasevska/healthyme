@@ -1,3 +1,7 @@
+/** Allowed age range for sign-up and profile */
+export const AGE_MIN = 11;
+export const AGE_MAX = 15;
+
 /** True if the value looks like an email, not a display username */
 export function looksLikeEmail(value) {
   if (!value || typeof value !== 'string') return false;

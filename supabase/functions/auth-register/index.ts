@@ -40,8 +40,8 @@ Deno.serve(async (req) => {
       return json({ error: "Password must be at least 6 characters." }, 400);
     }
     const ageNum = Number(age);
-    if (!age || ageNum < 10 || ageNum > 19) {
-      return json({ error: "Age must be between 10 and 19." }, 400);
+    if (!age || ageNum < 11 || ageNum > 15) {
+      return json({ error: "Age must be between 11 and 15." }, 400);
     }
 
     const admin = getAdminClient();

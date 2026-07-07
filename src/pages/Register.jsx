@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { HiMail, HiLockClosed, HiUser, HiEye, HiEyeOff } from 'react-icons/hi';
 import { useAuth } from '../context/AuthContext';
 import { formatAuthError } from '../utils/authErrors';
-import { looksLikeEmail } from '../utils/profileHelpers';
+import { looksLikeEmail, normalizeUsername, AGE_MIN, AGE_MAX } from '../utils/profileHelpers';
 import Button from '../components/ui/Button';
 import Card from '../components/ui/Card';
 import Alert from '../components/ui/Alert';
@@ -49,8 +49,8 @@ export default function Register() {
       return;
     }
     const age = Number(form.age);
-    if (!form.age || age < 10 || age > 19) {
-      setError('Please enter a valid age between 10 and 19.');
+    if (!form.age || age < AGE_MIN || age > AGE_MAX) {
+      setError(`Please enter a valid age between ${AGE_MIN} and ${AGE_MAX}.`);
       return;
     }
 
@@ -103,7 +103,7 @@ export default function Register() {
             {[
               { name: 'username', label: 'Username', hint: 'Shown on your profile and dashboard — not your email', icon: HiUser, type: 'text', placeholder: 'username', autoComplete: 'nickname' },
               { name: 'email', label: 'Email', icon: HiMail, type: 'email', placeholder: 'you@example.com', autoComplete: 'email' },
-              { name: 'age', label: 'Age', icon: HiUser, type: 'number', min: 10, max: 19 },
+              { name: 'age', label: 'Age', icon: HiUser, type: 'number', min: AGE_MIN, max: AGE_MAX },
             ].map(({ name, label, hint, icon: Icon, placeholder, autoComplete, ...rest }) => (
               <div key={name}>
                 <label htmlFor={name} className="block text-xs font-medium text-stone-500 mb-1.5">{label}</label>

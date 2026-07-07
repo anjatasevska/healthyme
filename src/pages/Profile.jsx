@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { HiFire } from 'react-icons/hi';
 import { useAuth } from '../context/AuthContext';
 import { BADGES } from '../utils/achievements';
-import { getDisplayName, getProfileAge, looksLikeEmail, normalizeUsername } from '../utils/profileHelpers';
+import { getDisplayName, getProfileAge, looksLikeEmail, normalizeUsername, AGE_MIN, AGE_MAX } from '../utils/profileHelpers';
 import { AppIcon, AVATAR_COLORS, UserAvatar } from '../utils/icons';
 import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
@@ -40,6 +40,10 @@ export default function Profile() {
     const username = form.username.trim();
     if (!username) return;
     if (looksLikeEmail(username)) return;
+    if (form.age) {
+      const ageNum = Number(form.age);
+      if (ageNum < AGE_MIN || ageNum > AGE_MAX) return;
+    }
     updateUserProfile({ ...form, username: normalizeUsername(username) });
     setEditing(false);
     setSaved(true);
@@ -143,8 +147,8 @@ export default function Profile() {
               <input
                 id="age"
                 type="number"
-                min="10"
-                max="19"
+                min={AGE_MIN}
+                max={AGE_MAX}
                 value={form.age}
                 onChange={(e) => setForm({ ...form, age: e.target.value })}
                 className="input-field p-2.5"
