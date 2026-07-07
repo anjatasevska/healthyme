@@ -119,7 +119,7 @@ export default function Profile() {
                 id="username"
                 value={form.username}
                 onChange={(e) => setForm({ ...form, username: e.target.value })}
-                placeholder="e.g. Anja"
+                placeholder="username"
                 autoComplete="nickname"
                 className="input-field p-2.5"
               />

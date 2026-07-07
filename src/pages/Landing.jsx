@@ -20,7 +20,7 @@ const features = [
 ];
 
 const steps = [
-  { title: 'Create account', desc: 'Set up your profile in under a minute.' },
+  { title: 'Sign up', desc: 'Set up your profile in under a minute.' },
   { title: 'Track daily', desc: 'Log mood, sleep, water, and exercise.' },
   { title: 'Complete challenges', desc: 'Finish your daily wellness task.' },
   { title: 'Review progress', desc: 'See your habits improve over time.' },
@@ -93,7 +93,7 @@ export default function Landing() {
         <div className="max-w-5xl mx-auto px-6 py-16 text-center">
           <h2 className="text-2xl font-semibold mb-3">Start your wellness journey</h2>
           <p className="text-slate-500 mb-6">Free to use. Private. Built for students.</p>
-          <Link to="/register"><Button size="lg">Create account</Button></Link>
+          <Link to="/register"><Button size="lg">Sign up</Button></Link>
         </div>
       </section>
 
@@ -103,7 +103,7 @@ export default function Landing() {
           <span>© 2026 · Inspired by HBSC Research</span>
           <div className="flex gap-4">
             <Link to="/login" className="hover:text-slate-900 dark:hover:text-white">Login</Link>
-            <Link to="/register" className="hover:text-slate-900 dark:hover:text-white">Register</Link>
+            <Link to="/register" className="hover:text-slate-900 dark:hover:text-white">Sign up</Link>
           </div>
         </div>
       </footer>

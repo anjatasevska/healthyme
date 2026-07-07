@@ -8,6 +8,9 @@ export function formatAuthError(message = '') {
   if (lower.includes('already registered') || lower.includes('already been registered') || lower.includes('user already registered')) {
     return 'This email is already registered. Try signing in instead.';
   }
+  if (lower.includes('failed to read') && lower.includes('headers')) {
+    return 'Supabase API key looks invalid. In Netlify, set VITE_SUPABASE_ANON_KEY to only the key (no extra words). Then redeploy.';
+  }
   if (lower.includes('invalid login credentials') || lower.includes('invalid email or password')) {
     return 'Invalid email or password. Please check and try again.';
   }

@@ -1,14 +1,23 @@
-import { getAccessToken, getFunctionsUrl, isSupabaseConfigured } from './supabase.js';
+import { getAccessToken, getFunctionsUrl, isSupabaseConfigured, supabaseAnonKey } from './supabase.js';
 import { formatApiError } from '../utils/authErrors.js';
 
-const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-
 function edgeHeaders(token) {
+  const bearer = cleanHeaderValue(token || supabaseAnonKey);
+  const key = cleanHeaderValue(supabaseAnonKey);
+
+  if (!bearer || !key) {
+    throw new Error('Supabase API key is missing or invalid. Check VITE_SUPABASE_ANON_KEY in Netlify.');
+  }
+
   return {
-    Authorization: `Bearer ${token || anonKey}`,
-    apikey: anonKey,
+    Authorization: `Bearer ${bearer}`,
+    apikey: key,
     'Content-Type': 'application/json',
   };
+}
+
+function cleanHeaderValue(value) {
+  return String(value ?? '').replace(/[^\x20-\x7E]/g, '').trim();
 }
 
 /**

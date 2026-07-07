@@ -1,13 +1,16 @@
 import { createClient } from '@supabase/supabase-js';
+import { cleanSupabaseAnonKey, cleanSupabaseUrl } from './env.js';
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const supabaseUrl = cleanSupabaseUrl(import.meta.env.VITE_SUPABASE_URL);
+const supabaseAnonKey = cleanSupabaseAnonKey(import.meta.env.VITE_SUPABASE_ANON_KEY);
 
 export const isSupabaseConfigured =
   !!supabaseUrl &&
   !!supabaseAnonKey &&
   supabaseUrl !== 'your_supabase_url' &&
-  supabaseAnonKey !== 'your_supabase_anon_key';
+  !supabaseUrl.includes('your-project-ref') &&
+  supabaseAnonKey !== 'your_supabase_anon_key' &&
+  !supabaseAnonKey.includes('your-supabase-anon-key');
 
 /** Auth-only client – no direct database queries from the browser */
 export const supabase = isSupabaseConfigured
@@ -23,3 +26,5 @@ export async function getAccessToken() {
 export function getFunctionsUrl() {
   return `${supabaseUrl}/functions/v1/wellness-api`;
 }
+
+export { supabaseUrl, supabaseAnonKey };

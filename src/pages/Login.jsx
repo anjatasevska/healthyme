@@ -96,7 +96,7 @@ export default function Login() {
             <Button type="submit" className="w-full" loading={loading}>Sign in</Button>
 
             <p className="text-center text-sm text-slate-500">
-              No account? <Link to="/register" className="text-primary font-medium hover:underline">Register</Link>
+              No account? <Link to="/register" className="text-primary font-medium hover:underline">Sign up</Link>
             </p>
           </form>
         </Card>

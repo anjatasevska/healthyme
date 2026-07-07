@@ -29,7 +29,7 @@ export default function Register() {
       return;
     }
     if (looksLikeEmail(form.username)) {
-      setError('Username cannot be your email. Pick a display name, e.g. Anja.');
+      setError('Username cannot be your email. Pick a display name.');
       return;
     }
     if (form.username.trim().length < 2) {
@@ -86,7 +86,7 @@ export default function Register() {
             <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white text-sm font-semibold">H</div>
             <span className="font-semibold">HealthyMe</span>
           </Link>
-          <h1 className="text-xl font-semibold">Create account</h1>
+          <h1 className="text-xl font-semibold">Sign up</h1>
           <p className="text-sm text-stone-500 mt-1">Pick a username and email to get started</p>
         </div>
 
@@ -101,7 +101,7 @@ export default function Register() {
             )}
 
             {[
-              { name: 'username', label: 'Username', hint: 'Shown on your profile and dashboard — not your email', icon: HiUser, type: 'text', placeholder: 'e.g. Anja', autoComplete: 'nickname' },
+              { name: 'username', label: 'Username', hint: 'Shown on your profile and dashboard — not your email', icon: HiUser, type: 'text', placeholder: 'username', autoComplete: 'nickname' },
               { name: 'email', label: 'Email', icon: HiMail, type: 'email', placeholder: 'you@example.com', autoComplete: 'email' },
               { name: 'age', label: 'Age', icon: HiUser, type: 'number', min: 10, max: 19 },
             ].map(({ name, label, hint, icon: Icon, placeholder, autoComplete, ...rest }) => (
@@ -145,7 +145,7 @@ export default function Register() {
             </div>
 
             <Button type="submit" className="w-full" loading={loading} disabled={!!success}>
-              Create account
+              Sign up
             </Button>
             <p className="text-center text-sm text-slate-500">
               Have an account? <Link to="/login" className="text-primary font-medium hover:underline">Sign in</Link>

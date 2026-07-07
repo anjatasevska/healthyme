@@ -55,7 +55,7 @@ export default function Onboarding() {
               id="onboard-username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              placeholder="Your display name"
+              placeholder="username"
               className="input-field p-2.5"
             />
           </div>
