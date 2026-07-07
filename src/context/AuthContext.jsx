@@ -227,8 +227,13 @@ export function AuthProvider({ children }) {
   };
 
   const login = async (email, password) => {
+    const normalizedEmail = email.trim().toLowerCase();
+
     if (isSupabaseConfigured && supabase) {
-      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: normalizedEmail,
+        password,
+      });
       if (error) throw error;
       setUser({
         uid: data.user.id,
@@ -241,9 +246,9 @@ export function AuthProvider({ children }) {
       return data.user;
     }
 
-    const localUser = getLocalUser(email, password);
-    setLocalSession({ uid: localUser.uid, email, profile: localUser });
-    setUser({ uid: localUser.uid, email });
+    const localUser = getLocalUser(normalizedEmail, password);
+    setLocalSession({ uid: localUser.uid, email: normalizedEmail, profile: localUser });
+    setUser({ uid: localUser.uid, email: normalizedEmail });
     setProfile(localUser);
     unlockBadge('first_login');
     updateStreak();

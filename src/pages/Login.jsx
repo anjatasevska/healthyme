@@ -13,7 +13,7 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const { login } = useAuth();
+  const { login, isSupabaseConfigured } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || '/dashboard';
@@ -34,7 +34,7 @@ export default function Login() {
 
     setLoading(true);
     try {
-      await login(email.trim(), password);
+      await login(email, password);
       navigate(from, { replace: true });
     } catch (err) {
       setError(formatAuthError(err?.message));
@@ -57,6 +57,14 @@ export default function Login() {
 
         <Card hover={false}>
           <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+            {!isSupabaseConfigured && (
+              <Alert type="error">
+                This deployed site is not connected to Supabase. In Netlify go to{' '}
+                <strong>Site configuration → Environment variables</strong> and add{' '}
+                <code className="text-xs">VITE_SUPABASE_URL</code> and{' '}
+                <code className="text-xs">VITE_SUPABASE_ANON_KEY</code>, then redeploy.
+              </Alert>
+            )}
             {registered && (
               <Alert type="success">Account ready. Sign in with your email and password.</Alert>
             )}

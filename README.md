@@ -122,14 +122,21 @@ npm run dev
 
 Open the URL shown in the terminal (usually `http://localhost:5173`).
 
-### 5. Production build
+### Deploy on Netlify
 
-```bash
-npm run build
-npm run preview
-```
+1. Connect your GitHub repo in Netlify.
+2. Build settings (or use the included `netlify.toml`):
+   - **Build command:** `npm run build`
+   - **Publish directory:** `dist`
+3. Add environment variables under **Site configuration → Environment variables**:
+   - `VITE_SUPABASE_URL` — your Supabase project URL
+   - `VITE_SUPABASE_ANON_KEY` — your Supabase anon key
+4. **Redeploy** after adding variables (env vars are baked in at build time).
 
----
+Without these variables, login will not work on the live site even if accounts exist in Supabase.
+
+The `public/_redirects` file fixes **Page not found** when refreshing routes like `/login` or `/dashboard`.
+
 
 ## Project Structure
 
